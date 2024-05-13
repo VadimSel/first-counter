@@ -1,0 +1,98 @@
+h1 {
+    display: inline;
+}
+
+button {
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: rgb(22, 151, 198);
+    background-color: rgb(22, 151, 198);
+    box-shadow: -2px 2px 3px 0px rgba(0,0,0,0.56);
+    top: 0px;
+    width: 50px;
+}
+
+button:active {
+    position: relative;
+    top: 1px;
+    background-color: rgb(12, 128, 170);
+}
+
+button:disabled {
+    top: 0px;
+    background-color: rgb(22, 151, 198);
+}
+
+input {
+    box-shadow: -2px 2px 3px 0px rgba(0,0,0,0.56);
+    text-align: center;
+}
+
+.mainDiv {
+    background: rgb(26,130,165);
+    background: linear-gradient(135deg, rgba(26,130,165,1) 0%, rgba(76,66,116,1) 65%);
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    min-height: 100vh;
+    margin: 0 auto;
+    gap: 200px;
+}
+
+.valueAndIncButton {
+    border: 2px solid rgb(26,130,165);
+    box-shadow: -5px 5px 5px 0px rgba(0,0,0,0.56);
+    border-radius: 10px;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleValue {
+    padding: 30px 0 42px 0;
+    color: white;
+    text-shadow: 0px 0px 3px black;
+}
+
+.inputsAndTextAndButtons {
+    border: 2px solid rgb(26,130,165);
+    box-shadow: -5px 5px 5px 0px rgba(0,0,0,0.56);
+    border-radius: 10px;
+    display: flex;
+    width: 300px;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    font-weight: 600;
+}
+
+.text :nth-child(3) {
+    margin: 15px 0 -15px 12px;
+}
+
+.inputsFromSettings {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    margin: 0 0 0 50px;
+    gap: 25px;
+}
+
+.inputsFromSettings :nth-child(3) {
+    margin: 15px 0 -15px 25px;
+}

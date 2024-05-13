@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Button } from "./Button";
 import { Input } from "./Input";
+import s from "./Counter.module.css"
 
 export const Counter = () => {
 
@@ -14,11 +15,13 @@ export const Counter = () => {
     // Input handlers
     const maxValueHandler = (value: string) => {
         let maxHandlerValue = parseInt(value);
-        setMaxValue(maxHandlerValue);
-        if (maxHandlerValue < 0 || maxHandlerValue < minValue || minValue < 0) {
-            setError("Incorrect value!");
-        } else {
-            setError(null);
+        if (!isNaN(maxHandlerValue)) {
+            setMaxValue(maxHandlerValue);
+            if (maxHandlerValue < 0 || maxHandlerValue < minValue || minValue < 0) {
+                setError("Incorrect value!");
+            } else {
+                setError(null);
+            }
         }
     };
 
@@ -91,13 +94,27 @@ export const Counter = () => {
 
     // Layout
     return (
-        <div>
-            {error ? <h1>{error}</h1> : <div><h1>{currentValue}</h1></div>}
-            <Input type={"number"} value={maxValue} onChange={maxValueHandler} />
-            <Input type={"number"} value={minValue} onChange={minValueHandler} />
-            <Button buttonName={"inc"} buttonCallback={increment} disabled={incDisabledHandler()} />
-            <Button buttonName={"reset"} buttonCallback={reset} disabled={resetDisabledHandler()} />
-            <Button buttonName={"set"} buttonCallback={setHandler} disabled={setDisabledHandler()} />
+        <div className={s.mainDiv}>
+            <div className={s.container}>
+                <div className={s.valueAndIncButton}>
+                    <div className={s.titleValue}>
+                        {error ? <h1>{error}</h1> : <h1>{currentValue}</h1>}
+                    </div>
+                    <Button buttonName={"inc"} buttonCallback={increment} disabled={incDisabledHandler()} />
+                </div>
+                <div className={s.inputsAndTextAndButtons}>
+                    <div className={s.text}>
+                        <span>Max value:</span>
+                        <span>Min value:</span>
+                        <Button buttonName={"reset"} buttonCallback={reset} disabled={resetDisabledHandler()} />
+                    </div>
+                    <div className={s.inputsFromSettings}>
+                        <Input type={"number"} value={maxValue} onChange={maxValueHandler} />
+                        <Input type={"number"} value={minValue} onChange={minValueHandler} />
+                        <Button buttonName={"set"} buttonCallback={setHandler} disabled={setDisabledHandler()} />
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
