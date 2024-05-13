@@ -12,28 +12,6 @@ export const Counter = () => {
     // ---------------------------------------------
 
     // Input handlers
-    // const maxValueHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    //     let maxHandlerValue = parseInt(event.currentTarget.value);
-    //     setMaxValue(maxHandlerValue);
-    //     if (maxHandlerValue < 0 || maxHandlerValue < minValue || minValue < 0) {
-    //         setError("Incorrect value!");
-    //     } else {
-    //         setError(null);
-    //     }
-    // };
-
-    // const minValueHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    //     const minHandlerValue = parseInt(event.currentTarget.value);
-    //     if (!isNaN(minHandlerValue)) {
-    //         setMinValue(minHandlerValue);
-    //         if (minHandlerValue < 0 || minHandlerValue > maxValue) {
-    //             setError("Incorrect value!");
-    //         } else {
-    //             setError(null);
-    //         }
-    //     }
-    // }
-    
     const maxValueHandler = (value: string) => {
         let maxHandlerValue = parseInt(value);
         setMaxValue(maxHandlerValue);
@@ -115,8 +93,6 @@ export const Counter = () => {
     return (
         <div>
             {error ? <h1>{error}</h1> : <div><h1>{currentValue}</h1></div>}
-            {/* <input type={"number"} value={maxValue} onChange={maxValueHandler} placeholder={"Max value"} /> */}
-            {/* <input type={"number"} value={minValue} onChange={minValueHandler} placeholder={"Min value"} /> */}
             <Input type={"number"} value={maxValue} onChange={maxValueHandler} />
             <Input type={"number"} value={minValue} onChange={minValueHandler} />
             <Button buttonName={"inc"} buttonCallback={increment} disabled={incDisabledHandler()} />
