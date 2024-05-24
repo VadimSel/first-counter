@@ -2,25 +2,31 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Button } from "./Button";
 import { Input } from "./Input";
 import s from "./Counter.module.css"
+import { useDispatch, useSelector } from "react-redux";
+import { ActionsType, setCurrentValueAC, setErrorAC, setMaxValueAC, setMinValueAC } from "../redux/actions";
+import { RootReducerType } from "../redux/store";
 
-export const Counter = () => {
+export const CounterWithRedux = () => {
 
-    // States
-    let [maxValue, setMaxValue] = useState(5);
-    let [minValue, setMinValue] = useState(0);
-    let [currentValue, setCurrentValue] = useState(0);
-    const [error, setError] = useState<string | null>(null);
+    // Redux states
+    let maxValue = useSelector((state: RootReducerType) => state.counter.maxValue)
+    let minValue = useSelector((state: RootReducerType) => state.counter.minValue)
+    let currentValue = useSelector((state: RootReducerType) => state.counter.currentValue)
+    let error = useSelector((state: RootReducerType) => state.counter.error)
+
+    const dispatch = useDispatch()
+
     // ---------------------------------------------
 
     // Input handlers
     const maxValueHandler = (value: string) => {
         let maxHandlerValue = parseInt(value);
         if (!isNaN(maxHandlerValue)) {
-            setMaxValue(maxHandlerValue);
+            dispatch(setMaxValueAC(maxHandlerValue));
             if (maxHandlerValue < 0 || maxHandlerValue < minValue || minValue < 0) {
-                setError("Incorrect value!");
+                dispatch(setErrorAC("Incorrect value!"));
             } else {
-                setError(null);
+                dispatch(setErrorAC(null));
             }
         }
     };
@@ -28,11 +34,11 @@ export const Counter = () => {
     const minValueHandler = (value: string) => {
         const minHandlerValue = parseInt(value);
         if (!isNaN(minHandlerValue)) {
-            setMinValue(minHandlerValue);
+            dispatch(setMinValueAC(minHandlerValue));
             if (minHandlerValue < 0 || minHandlerValue > maxValue) {
-                setError("Incorrect value!");
+                dispatch(setErrorAC("Incorrect value!"));
             } else {
-                setError(null);
+                dispatch(setErrorAC(null));
             }
         }
     }
@@ -40,15 +46,15 @@ export const Counter = () => {
 
     // Buttons handler
     const setHandler = () => {
-        setCurrentValue(minValue);
+        dispatch(setCurrentValueAC(minValue));
     };
     const increment = () => {
         if (currentValue < maxValue) {
-            setCurrentValue(++currentValue);
+            dispatch(setCurrentValueAC(++currentValue));
         }
     };
     const reset = () => {
-        setCurrentValue(minValue);
+        dispatch(setCurrentValueAC(minValue));
     };
     // ---------------------------------------------
 
@@ -63,21 +69,21 @@ export const Counter = () => {
         let valueAsString = localStorage.getItem("currentCounterValue")
         if (valueAsString) {
             let newValue = JSON.parse(valueAsString)
-            setCurrentValue(newValue)
+            dispatch(setCurrentValueAC(newValue))
         }
     }, [])
     useEffect(() => {
         let valueAsString = localStorage.getItem("currentMinValue")
         if (valueAsString) {
             let newMinValue = JSON.parse(valueAsString)
-            setMinValue(newMinValue)
+            dispatch(setMinValueAC(newMinValue))
         }
     }, [])
     useEffect(() => {
         let valueAsString = localStorage.getItem("currentMaxValue")
         if (valueAsString) {
             let newMaxValue = JSON.parse(valueAsString)
-            setMaxValue(newMaxValue)
+            dispatch(setMaxValueAC(newMaxValue))
         }
     }, [])
 
